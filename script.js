@@ -650,8 +650,7 @@ if (contactForm) {
 
                 const response =
                     await fetch(
-                        "/api/contact"
-
+                        "http://localhost:5000/api/contact",
                         {
 
                             method: "POST",
@@ -838,8 +837,7 @@ if (contactForm) {
         try {
 
             const response = await fetch(
-                "/api/contact"
-,
+                "http://localhost:5000/api/contact",
                 {
                     method: "POST",
 
