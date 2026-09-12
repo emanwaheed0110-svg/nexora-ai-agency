@@ -31,11 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* Safety fallback */
         setTimeout(() => {
-
-            preloader.style.opacity = "0";
-            preloader.style.visibility = "hidden";
-            preloader.style.pointerEvents = "none";
-
+            preloader.remove();
         }, 4000);
 
     }
@@ -881,3 +877,6 @@ if (contactForm) {
     });
 
 }
+
+
+
