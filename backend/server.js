@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
+require("dotenv").config({ path: __dirname + "/.env" });
 
 const { createClient } = require("@supabase/supabase-js");
 
@@ -144,3 +144,4 @@ app.listen(PORT, () => {
     console.log("");
 
 });
+
