@@ -1,28 +1,18 @@
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config({ path: "./backend/.env" });
-
 const { createClient } = require("@supabase/supabase-js");
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 const supabase = createClient(
     process.env.SUPABASE_URL,
     process.env.SUPABASE_KEY
 );
 
-app.get("/", (req, res) => {
-    res.json({
-        success: true,
-        message: "NEXORA AI AGENCY Backend is running!"
-    });
-});
+module.exports = async (req, res) => {
+    if (req.method !== "POST") {
+        return res.status(405).json({
+            success: false,
+            message: "Method not allowed"
+        });
+    }
 
-app.post("/api/contact", async (req, res) => {
     try {
         const {
             name,
@@ -30,7 +20,7 @@ app.post("/api/contact", async (req, res) => {
             company,
             service,
             message
-        } = req.body;
+        } = req.body || {};
 
         if (!name || !email || !message) {
             return res.status(400).json({
@@ -39,7 +29,7 @@ app.post("/api/contact", async (req, res) => {
             });
         }
 
-        const { data, error } = await supabase
+        const { error } = await supabase
             .from("contacts")
             .insert([{
                 name,
@@ -47,8 +37,7 @@ app.post("/api/contact", async (req, res) => {
                 company: company || null,
                 service: service || null,
                 message
-            }])
-            .select();
+            }]);
 
         if (error) {
             console.error("SUPABASE ERROR:", error);
@@ -72,7 +61,4 @@ app.post("/api/contact", async (req, res) => {
             message: "Server error."
         });
     }
-});
-
-module.exports = app;
-
+};
