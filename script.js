@@ -646,13 +646,7 @@ if (contactForm) {
 
                 const response =
                     await fetch(
-    "/api/contact",
-    {
-
-
-                        {
-
-                            method: "POST",
+    "/api/contact", { method: "POST",
 
                             headers: {
                                 "Content-Type":
@@ -836,11 +830,7 @@ if (contactForm) {
         try {
 
             const response = await fetch(
-    "/api/contact",
-    {
-
-                {
-                    method: "POST",
+    "/api/contact", { method: "POST",
 
                     headers: {
                         "Content-Type": "application/json"
@@ -877,6 +867,7 @@ if (contactForm) {
     });
 
 }
+
 
 
 
